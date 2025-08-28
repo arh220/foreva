@@ -20,12 +20,18 @@
                         <div class="categories__item categories__large__item set-bg"
                             data-setbg="img/categories/category-1.jpg">
                             <div class="categories__text">
-                                <h1>
-                                    <%= getAllcat[0].catname %>
-                                </h1>
-                                <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
-                                    edolore magna aliquapendisse ultrices gravida.</p>
-                                <a href="/item/<%= getAllcat[0]._id %>">Shop now</a>
+                                <% if (getAllcat && getAllcat.length> 0) { %>
+                                    <h1>
+                                        <%= getAllcat[0].catname %>
+                                    </h1>
+                                    <% } else { %>
+                                        <h1>No Category Found</h1>
+                                        <% } %>
+
+                                            <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt
+                                                labore
+                                                edolore magna aliquapendisse ultrices gravida.</p>
+                                            <a href="/item/<%= getAllcat[0]._id %>">Shop now</a>
                             </div>
                         </div>
                     </div>
