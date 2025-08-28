@@ -1,7 +1,7 @@
 async function checkAuth(req, res, next) {
   if (!req.user) {
-    res.render("signin", { error: "You Must Be Logged In... " });
+    return res.render("signin", { error: "You Must Be Logged In... " });
   }
-  next();
+  return next();
 }
 module.exports = { checkAuth };
