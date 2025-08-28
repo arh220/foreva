@@ -44,5 +44,6 @@ router.get("/allitem", getAllItems);
 router.get("/edititem/:id", editItemPage);
 router.post("/updateItem/:id", upload.single("image"), updateItem);
 router.get("/delitem/:id", deleteItem);
+router.get("/admin/allorders")
 
 module.exports = router;
