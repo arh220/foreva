@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+        <title>Admin</title>
+</head>
+
+<body>
+    <%- include("./partials/sidebar.ejs") %>
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                <h2 class="main-title">Dashboard</h2>
+                <!-- ! Main -->
+                <main class="page-center ">
+
+                    <form class="sign-up-form form" action="/admin/addcat" method="post">
+                        <h3>Add Category</h3>
+
+                        <label class="form-label-wrapper">
+                            <p class="form-label">Category Name</p>
+                            <input class="form-input" name="catname" type="text" placeholder="Enter your Category"
+                                required>
+                        </label>
+
+                        <button class="form-btn primary-default-btn transparent-btn">Add</button>
+                    </form>
+
+                </main>
+            </div>
+        </main>
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+
+</body>
+
+</html>

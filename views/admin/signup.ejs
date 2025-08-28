@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Elegant Dashboard | Sign Up</title>
+    <!-- Favicon -->
+    <%- include("./partials/head.ejs") %>
+</head>
+
+<body>
+    <%- include("./partials/sidebar.ejs") %>
+        <main class="main users chart-page" id="skip-target">
+            <div class="container py-4">
+                <h2 class="main-title">Dashboard</h2>
+
+                <div class="card shadow rounded mx-auto" style="max-width: 800px; ">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Admin Sign Up</h3>
+
+                        <form action="/admin/signup" method="post" enctype="multipart/form-data">
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">Name<sup>*</sup></label>
+                                    <input type="text" name="name"
+                                        class="form-control shadow-sm border border-secondary" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Email Address<sup>*</sup></label>
+                                    <input type="email" name="email"
+                                        class="form-control shadow-sm border border-secondary" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Password<sup>*</sup></label>
+                                    <input type="password" name="password"
+                                        class="form-control shadow-sm border border-secondary" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Role<sup>*</sup></label>
+                                    <select class="form-select shadow-sm border border-secondary" name="role" required>
+                                        <option value="">Select your Role</option>
+                                        <option value="ADMIN">ADMIN</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Mobile<sup>*</sup></label>
+                                    <input type="tel" name="mo" class="form-control shadow-sm border border-secondary"
+                                        maxlength="10" pattern="[0-9]{10}" title="Enter a valid 10-digit mobile number"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">City<sup>*</sup></label>
+                                    <select class="form-select shadow-sm border border-secondary" name="city" required>
+                                        <option value="">Select your city</option>
+                                        <option value="mumbai">Mumbai</option>
+                                        <option value="delhi">Delhi</option>
+                                        <option value="surat">Surat</option>
+                                        <option value="hyderabad">Hyderabad</option>
+                                        <option value="rajkot">Rajkot</option>
+                                        <option value="kolkata">Kolkata</option>
+                                        <option value="pune">Pune</option>
+                                        <option value="ahmedabad">Ahmedabad</option>
+                                        <option value="jaipur">Jaipur</option>
+                                        <option value="lucknow">Lucknow</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label">Profile Image<sup>*</sup></label>
+                                    <input type="file" name="image"
+                                        class="form-control shadow-sm border border-secondary" required>
+                                </div>
+
+                                <div class="col-md-6 form-item">
+                                    <label class="form-label">Date of Birth<sup>*</sup></label>
+                                    <input type="date" class="form-control shadow-sm border border-secondary" name="dob"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Gender<sup>*</sup></label>
+                                    <div class="d-flex align-items-center mt-1">
+                                        <div class="form-check me-3">
+                                            <input class="form-check-input" type="radio" name="gender" id="genderMale"
+                                                value="male" required>
+                                            <label class="form-check-label" for="genderMale">Male</label>
+                                        </div>
+                                        <div class="form-check me-3">
+                                            <input class="form-check-input" type="radio" name="gender" id="genderFemale"
+                                                value="female">
+                                            <label class="form-check-label" for="genderFemale">Female</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 text-center mt-3">
+                                    <button type="submit" class="btn btn-primary px-5">Submit</button>
+                                </div>
+
+                                <div class="col-md-12 text-center mt-2">
+                                    <a href="/admin/signin" class="text-decoration-none">Back to Sign In</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        <%- include("./partials/footer.ejs") %>
+
+            <%- include("./partials/script.ejs") %>
+
+</body>
+
+</html>

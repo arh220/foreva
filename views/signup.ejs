@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Sign Up</title>
+    <%- include("./partials/head.ejs") %>
+
+</head>
+
+<body>
+    <%- include("./partials/navbar.ejs") %>
+        <!-- Breadcrumb Begin -->
+        <div class="breadcrumb-option">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb__links">
+                            <a href="/"><i class="fa fa-home"></i> Home</a>
+                            <span>Sign Up</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breadcrumb End -->
+        <section class="checkout spad">
+            <div class="container">
+
+                <form action="/signup" method="post" class="checkout__form col-12 col-md-6 mx-auto"
+                    enctype="multipart/form-data">
+                    <div class="row">
+                        <% if (error) { %>
+                            <div class="alert alert-danger text-center col-lg-12">
+                                <%= error %>
+                            </div>
+                            <% } %>
+                                <div class="col-lg-12">
+                                    <h5 class="text-center">Sign Up</h5>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="checkout__form__input">
+                                                <p>Name <span>*</span></p>
+                                                <input type="text" name="name">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="checkout__form__input">
+                                                <p>Email <span>*</span></p>
+                                                <input type="text" name="email">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="checkout__form__input">
+                                                <p>Password<span>*</span></p>
+                                                <input type="password" name="password">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="checkout__form__input">
+                                                <p>Mobile<span>*</span></p>
+                                                <input id="mobile" type="text" name="mo" maxlength="10" pattern="\d{10}"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="checkout__form__input">
+                                                <p>Town/City <span>*</span></p>
+                                                <input type="text" name="city">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class=" checkout__form__input">
+                                                <p>Date of Birth <span>*</span></p>
+                                                <input type="date" name="dob" id="dob">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class=" checkout__form__input">
+                                                <p>Uplod Profile <span>*</span></p>
+                                                <input type="file" name="image">
+                                            </div>
+                                        </div>
+                                        <div class="d-md-flex mb-3">
+                                            <div class="form-group w-100 ml-md-2 d-flex align-items-center">
+                                                <label class="mr-3 mb-0 ml-2">Gender:</label>
+                                                <div class="form-check mr-3">
+                                                    <input class="form-check-input" type="radio" name="gender" id="male"
+                                                        value="male">
+                                                    <label class="form-check-label" for="male">Male</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender"
+                                                        id="female" value="female">
+                                                    <label class="form-check-label" for="female">Female</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="site-btn mx-auto">Sign up</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+</body>
+
+
+</html>

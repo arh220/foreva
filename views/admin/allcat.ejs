@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+        <title>All Menu Categories</title>
+</head>
+
+<body>
+    <%- include("./partials/sidebar.ejs") %>
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                <h2 class="main-title">Dashboard</h2>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="users-table" style="max-width: 500px; width: 100%; margin: auto; ">
+                            <table class="posts-table" style="width: 100%;">
+                                <thead>
+                                    <tr class="users-table-info">
+                                        <th>No</th>
+                                        <th>Menu Categories</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (allCategories && allCategories.length>0) { %>
+                                        <% allCategories.forEach((cat,index)=> { %>
+                                            <tr>
+                                                <td>
+                                                    <%= index+1 %>
+                                                </td>
+                                                <td>
+                                                    <%= cat.catname %>
+                                                </td>
+                                                <td><a href="/admin/delcat/<%= cat._id %>"><i
+                                                            class="fa-solid fa-trash"></i></a></td>
+                                            </tr>
+                                            <% }) %>
+                                                <% } %>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+
+
+</body>
+
+</html>

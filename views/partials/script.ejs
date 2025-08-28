@@ -1,0 +1,140 @@
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/mixitup.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.nicescroll.min.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- DOB Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let today = new Date().toISOString().split("T")[0];
+        document.getElementById("dob").setAttribute("max", today);
+    });
+</script>
+<!-- Item page Script -->
+<script>
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const id = this.dataset.id;
+            const name = this.dataset.name;
+            const price = parseFloat(this.dataset.price);
+            const image = this.dataset.image;
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.qty += 1; // increase quantity if already in cart
+            } else {
+                cart.push({ id, name, price, image, qty: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Redirect to your EJS-rendered cart page
+            window.location.href = '/cart'; // <-- change this to your Express route
+        });
+    });
+</script>
+
+<!-- cart page Script -->
+
+
+
+<!-- ckeckout page Script -->
+<script>
+    function renderCheckout() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const checkoutItems = document.getElementById('checkoutItems');
+        const subtotalSpan = document.getElementById('checkoutSubtotal');
+        const totalSpan = document.getElementById('checkoutTotal');
+        const deliverySpan = document.getElementById('checkoutDelivery');
+
+        const cartItemInput = document.getElementById('cartItemInput');
+        const subtotalInput = document.getElementById('subtotalInput');
+        const deliveryInput = document.getElementById('deliveryInput');
+        const grandTotalInput = document.getElementById('grandTotalInput');
+
+        const deliveryCharge = 50;
+
+        // Calculate subtotal
+        let subtotal = 0;
+        const formattedCart = cart.map(item => {
+            const total = item.price * item.qty;
+            subtotal += total;
+            return {
+                id: item.id,
+                itemname: item.name,
+                price: item.price,
+                qty: item.qty,
+                total: total
+            };
+        });
+
+        // Fill table
+        checkoutItems.innerHTML = `
+        <li style="display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #ddd;">
+            <span class="top__text" style="width: 50%; text-align: left;">Item</span>
+            <span class="top__text" style="width: 20%; text-align: center;">Qty</span>
+            <span class="top__text__right" style="width: 30%; text-align: right;">Total</span>
+        </li>
+    `;
+        formattedCart.forEach(item => {
+            const li = document.createElement('li');
+            li.style.display = "flex";
+            li.style.justifyContent = "space-between";
+            li.style.padding = "5px 0";
+            li.style.borderBottom = "1px solid #f0f0f0";
+            li.innerHTML = `
+            <span style="width: 50%; text-align: left;">${item.itemname}</span>
+            <span style="width: 20%; text-align: center;">${item.qty}</span>
+            <span style="width: 30%; text-align: right;">₹ ${item.total.toFixed(2)}</span>
+        `;
+            checkoutItems.appendChild(li);
+        });
+
+        // Update totals in UI
+        subtotalSpan.textContent = `₹ ${subtotal.toFixed(2)}`;
+        deliverySpan.textContent = `₹ ${deliveryCharge.toFixed(2)}`;
+        totalSpan.textContent = `₹ ${(subtotal + deliveryCharge).toFixed(2)}`;
+
+        // Set hidden input values
+        cartItemInput.value = JSON.stringify(formattedCart);
+        subtotalInput.value = subtotal.toFixed(2);
+        deliveryInput.value = deliveryCharge.toFixed(2);
+        grandTotalInput.value = (subtotal + deliveryCharge).toFixed(2);
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCheckout);
+</script>
+
+
+<!-- cart counting navbar Script -->
+<script>
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const count = cart.reduce((acc, item) => acc + item.qty, 0); // total quantity
+        document.getElementById('cart-count').textContent = count;
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+</script>
+
+<!-- likes counting navbar Script -->
+
+<script>
+    function updateLikesCount() {
+        const likes = JSON.parse(localStorage.getItem('likes')) || [];
+        document.getElementById('likes-count').textContent = likes.length;
+    }
+
+    document.addEventListener('DOMContentLoaded', updateLikesCount);
+</script>

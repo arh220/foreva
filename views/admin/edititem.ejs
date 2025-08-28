@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+        <title>Add Category Item</title>
+</head>
+
+<body>
+    <%- include("./partials/sidebar.ejs") %>
+        <main class="main users chart-page" id="skip-target">
+            <div class="container">
+                <h2 class="main-title">Dashboard</h2>
+
+                <!-- Main Form Section -->
+                <main class="page-center">
+                    <form class="sign-up-form form" action="/admin/updateItem/<%= selectedItem._id %>" method="POST"
+                        enctype="multipart/form-data">
+                        <h3 class="text-center">Add Item</h3>
+                        <label class="form-label-wrapper">
+                            <p class="form-label">Item Name</p>
+                            <input class="form-input" name="itemname" type="text" placeholder="Enter Product Name"
+                                required value="<%= selectedItem.itemname %>">
+                        </label>
+                        <label class="form-label-wrapper">
+                            <p class="form-label">MRP</p>
+                            <input class="form-input" name="mrp" type="number" step="0.01" placeholder="Enter MRP"
+                                required value="<%= selectedItem.mrp %>">
+                        </label>
+                        <label class="form-label-wrapper">
+                            <p class="form-label">Description</p>
+                            <textarea class="form-input" name="disc" rows="3" placeholder="Enter Description"
+                                required><%= selectedItem.disc %></textarea>
+                        </label>
+                        <label class="form-label-wrapper">
+                            <p class="form-label">Item Image</p>
+                            <input class="form-input" type="file" name="image" accept="image/*">
+                        </label>
+                        <div style="margin-top: 5px;">
+                            <p>Current Image:</p>
+                            <img src="<%= selectedItem.image %>" alt="Product Image"
+                                style="max-width: 80px; border-radius: 6px;">
+                        </div>
+                        <button class="form-btn primary-default-btn transparent-btn">Add Item</button>
+                    </form>
+                </main>
+            </div>
+        </main>
+
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+
+
+</body>
+
+</html>

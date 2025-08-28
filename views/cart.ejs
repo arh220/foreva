@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cart</title>
+    <%- include('./partials/head.ejs') %>
+</head>
+
+<body>
+    <%- include('./partials/navbar.ejs') %>
+        <div class="breadcrumb-option">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb__links">
+                            <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                            <span>cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="shop-cart spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shop__cart__table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="cart__btn">
+                            <a href="/">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="cart__btn update__btn">
+                            <a href="#"><span class="icon_loading"></span> Update cart</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 offset-lg-2">
+                        <div class="cart__total__procced">
+                            <h6>Cart total</h6>
+                            <ul>
+                                <li>Subtotal <span>₹ 0.00</span></li>
+                                <li>Delivery <span>₹ 0.00</span></li>
+                                <li>Total <span>₹ 0.00</span></li>
+                            </ul>
+                            <a href="/checkout" class="primary-btn">Proceed to checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('./partials/footer.ejs') %>
+            <%- include('./partials/script.ejs') %>
+                <script>
+                    function renderCart() {
+                        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        const tbody = document.querySelector('table tbody');
+                        tbody.innerHTML = '';
+
+                        let subtotal = 0;
+                        const deliveryCharge = 50; // Fixed delivery charge
+
+                        cart.forEach((item, index) => {
+                            const total = (item.price * item.qty).toFixed(2);
+                            subtotal += parseFloat(total);
+
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+            <td class="cart__product__item">
+                <img src="${item.image}" alt="${item.name}" style="width:80px; height:80px;">
+                <div class="cart__product__item__title">
+                    <h6>${item.name}</h6>
+                </div>
+            </td>
+            <td class="cart__price">₹ ${item.price.toFixed(2)}</td>
+            <td class="cart__quantity">
+                <div class="pro-qty">
+                    <input type="number" min="1" value="${item.qty}" data-index="${index}">
+                </div>
+            </td>
+            <td class="cart__total">₹ ${total}</td>
+            <td class="cart__close"><span class="icon_close" data-index="${index}"></span></td>
+        `;
+                            tbody.appendChild(tr);
+                        });
+
+                        const totalWithDelivery = subtotal + deliveryCharge;
+
+                        // Update totals in the cart
+                        const ul = document.querySelector('.cart__total__procced ul');
+                        ul.children[0].querySelector('span').textContent = `₹ ${subtotal.toFixed(2)}`; // Subtotal
+                        ul.children[1].querySelector('span').textContent = `₹ ${deliveryCharge.toFixed(2)}`; // Delivery
+                        ul.children[2].querySelector('span').textContent = `₹ ${totalWithDelivery.toFixed(2)}`; // Total
+
+                        addEventListeners();
+                    }
+
+                    function addEventListeners() {
+                        // Quantity change
+                        document.querySelectorAll('.cart__quantity input').forEach(input => {
+                            input.addEventListener('change', function () {
+                                const index = this.dataset.index;
+                                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                                const newQty = parseInt(this.value);
+                                if (newQty < 1) this.value = 1;
+
+                                cart[index].qty = newQty;
+                                localStorage.setItem('cart', JSON.stringify(cart));
+                                renderCart();
+                            });
+                        });
+
+                        // Remove item
+                        document.querySelectorAll('.cart__close .icon_close').forEach(btn => {
+                            btn.addEventListener('click', function () {
+                                const index = this.dataset.index;
+                                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                                cart.splice(index, 1);
+                                localStorage.setItem('cart', JSON.stringify(cart));
+                                renderCart();
+                            });
+                        });
+                    }
+
+                    document.addEventListener('DOMContentLoaded', renderCart);
+
+                    // Update cart button
+                    document.querySelector('.update__btn a').addEventListener('click', function (e) {
+                        e.preventDefault();
+                        renderCart();
+                    });
+                </script>
+
+
+</body>
+
+</html>

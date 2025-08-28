@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Sign In page</title>
+    <%- include("./partials/head.ejs") %>
+
+</head>
+
+<body>
+    <%- include("./partials/navbar.ejs") %>
+        <!-- Breadcrumb Begin -->
+        <div class="breadcrumb-option">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb__links">
+                            <a href="/"><i class="fa fa-home"></i> Home</a>
+                            <span>Sign In</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breadcrumb End -->
+        <section class="checkout spad">
+            <div class="container">
+                <form action="/signin" method="post" class="checkout__form col-12 col-md-6 mx-auto">
+                    <div class="row">
+                        <% if (error) { %>
+                            <div class="alert alert-danger text-center col-lg-12">
+                                <%= error %>
+                            </div>
+                            <% } %>
+                                <div class="col-lg-12">
+                                    <h5 class="text-center">Sign In</h5>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="checkout__form__input">
+                                                <p>Email <span>*</span></p>
+                                                <input type="text" name="email">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="checkout__form__input">
+                                                <p>Password<span>*</span></p>
+                                                <input type="password" name="password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="site-btn mx-auto">Sign In</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+</body>
+
+
+</html>

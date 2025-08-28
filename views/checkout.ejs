@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Checkout Page</title>
+    <%- include("./partials/head.ejs") %>
+</head>
+
+<body>
+    <%- include("./partials/navbar.ejs") %>
+        <!-- Breadcrumb Begin -->
+        <div class="breadcrumb-option">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="breadcrumb__links">
+                            <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                            <span>Checkout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+
+        <!-- Checkout Section Begin -->
+        <section class="checkout spad">
+            <div class="container">
+
+                <form action="/conformorder" method="post" class="checkout__form">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h5>Billing detail</h5>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="checkout__form__input">
+                                        <p>Name <span>*</span></p>
+                                        <input type="text" name="name" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="checkout__form__input">
+                                        <p>Phone <span>*</span></p>
+                                        <input type="text" name="mo" maxlength="10" pattern="\d{10}"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="checkout__form__input">
+                                        <p>Email <span>*</span></p>
+                                        <input type="text" name="email" value="<%= user.email %>" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+
+                                    <div class="checkout__form__input">
+                                        <p>Address <span>*</span></p>
+                                        <input type="text" placeholder="Street Address" name="address" required>
+                                    </div>
+                                    <div class="checkout__form__input">
+                                        <p>Town/City <span>*</span></p>
+                                        <input type="text" name="city" required>
+                                    </div>
+                                    <div class="checkout__form__input">
+                                        <p>Postcode/Zip <span>*</span></p>
+                                        <input type="text" name="zip" maxlength="6" pattern="\d{6}"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);"
+                                            required>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="checkout__order">
+                                <h5>Your order</h5>
+                                <div class="checkout__order__product">
+                                    <ul id="checkoutItems">
+                                        <li
+                                            style="display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #ddd;">
+                                            <span class="top__text" style="width: 50%; text-align: left;">Item</span>
+                                            <span class="top__text" style="width: 20%; text-align: center;">Qty</span>
+                                            <span class="top__text__right"
+                                                style="width: 30%; text-align: right;">Total</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="checkout__order__total">
+                                    <ul>
+                                        <li>Subtotal <span id="checkoutSubtotal">₹0.0</span></li>
+                                        <li>Delivery <span id="checkoutDelivery">₹50.0</span></li>
+                                        <li>Total <span id="checkoutTotal">₹0.0</span></li>
+                                    </ul>
+                                </div>
+
+                                <div class="checkout__order__widget">
+                                    <label for="o-acc">
+                                        Create an account?
+                                        <input type="checkbox" id="o-acc">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <p>Create an account by entering the information below. If you are a returning
+                                        customer login at the top of the page.</p>
+                                    <label for="check-payment">
+                                        Cheque payment
+                                        <input type="checkbox" id="check-payment">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label for="paypal">
+                                        PayPal
+                                        <input type="checkbox" id="paypal">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <input type="hidden" name="cartItem" id="cartItemInput">
+                                <input type="hidden" name="subtotal" id="subtotalInput">
+                                <input type="hidden" name="deliveryCharge" id="deliveryInput">
+                                <input type="hidden" name="grandTotal" id="grandTotalInput">
+                                <button type="submit" class="site-btn">Place order</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- Checkout Section End -->
+        <%- include("./partials/footer.ejs") %>
+            <%- include("./partials/script.ejs") %>
+
+
+
+</body>
+
+
+</html>
